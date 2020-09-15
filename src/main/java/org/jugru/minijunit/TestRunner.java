@@ -33,9 +33,8 @@ public class TestRunner {
         testInfoPrinter.printTestClassResult(testClassResults);
     }
 
-    private TestClassResult runTests(Class<?> clazz) {
-        final Method[] methods = clazz.getDeclaredMethods();
-        final List<Method> testMethods = Arrays.stream(methods).filter(method -> method.isAnnotationPresent(Test.class)).collect(toList());
+    TestClassResult runTests(Class<?> clazz) {
+        final List<Method> testMethods = getTestMethods(clazz);
         final List<TestResult> testResults = testMethods.stream().map(method -> {
             try {
                 return run(method, clazz.getConstructor().newInstance());
@@ -43,6 +42,7 @@ public class TestRunner {
                 return TestResult.builder().success(false).exception(e).build();
             }
         }).collect(toList());
+
         final List<Exception> failedTestException = testResults.stream().map(TestResult::getException).filter(Objects::nonNull).collect(toList());
         final long successTestNumber = testResults.stream().filter(TestResult::isSuccess).count();
         return TestClassResult.builder()
@@ -53,7 +53,12 @@ public class TestRunner {
                 .build();
     }
 
-    private TestResult run(Method method, Object object) {
+    List<Method> getTestMethods(Class<?> clazz) {
+        final Method[] methods = clazz.getDeclaredMethods();
+        return Arrays.stream(methods).filter(method -> method.isAnnotationPresent(Test.class)).collect(toList());
+    }
+
+    TestResult run(Method method, Object object) {
         try {
             method.invoke(object);
             return TestResult.builder().success(true).build();

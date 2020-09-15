@@ -4,8 +4,6 @@ import static org.jugru.minijunit.assertion.AssertUtils.buildPrefix;
 import static org.jugru.minijunit.assertion.AssertUtils.fail;
 
 public class AssertSame {
-    private static final String EXPECTED_SAME = "expected: <null>";
-
     static void assertSame(Object expected, Object actual) {
         assertSame(expected, actual, null);
     }

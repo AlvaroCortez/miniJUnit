@@ -5,6 +5,7 @@ import org.jugru.minijunit.annotation.Test;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -26,6 +27,7 @@ public class TestClassValidation {
         return Stream.of(classErrors, methodErrors)
                 .flatMap(List::stream)
                 .filter(Objects::nonNull)
+                .sorted(Comparator.comparing(Throwable::getMessage))
                 .collect(toList());
     }
 

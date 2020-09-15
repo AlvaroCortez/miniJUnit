@@ -1,13 +1,13 @@
 package org.jugru.minijunit.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Builder
+@ToString
+@EqualsAndHashCode
 @AllArgsConstructor
 public class TestClassResult {
     private final String className;

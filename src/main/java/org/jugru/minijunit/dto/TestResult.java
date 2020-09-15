@@ -1,11 +1,11 @@
 package org.jugru.minijunit.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
 @Builder
+@ToString
+@EqualsAndHashCode
 @AllArgsConstructor
 public class TestResult {
     private final Exception exception;
