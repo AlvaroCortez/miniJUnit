@@ -25,7 +25,10 @@ public class TestInfoPrinterImpl implements TestInfoPrinter {
             writer.println(testClassResult.getClassName() + ":");
             writer.println(testClassResult.getSuccessTestNumber() + " tests completed");
             writer.println(testClassResult.getFailedTestNumber() + " failed");
-            testClassResult.getFailedTestExceptions().forEach(writer::println);
+            testClassResult.getFailedTestExceptions().forEach(e -> {
+                writer.println(e.getCause());
+                e.printStackTrace(writer);
+            });
         });
     }
 
