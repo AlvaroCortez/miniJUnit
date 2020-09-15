@@ -1,9 +1,8 @@
-package org.jugru.minijunit.test;
+package org.jugru.minijunit.help;
 
 import org.jugru.minijunit.annotation.Test;
 
-public class ExampleTest {
-
+public class ClassWithWrongTests {
     @Test
     public void goodTest() {
 
@@ -26,6 +25,10 @@ public class ExampleTest {
 
     @Test
     public static void badTest_static() {
+
+    }
+
+    public void noTest() {
 
     }
 }
